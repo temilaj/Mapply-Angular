@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Mapply';
+  latitude: number = 6.5244;
+  longitude: number = 3.3792;
 }
