@@ -7,3 +7,6 @@
  .map-container{
      padding: 0;
  }
+ .gm-style > div{
+     cursor: crosshair !important;
+ }

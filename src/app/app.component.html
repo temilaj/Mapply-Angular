@@ -9,12 +9,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
     </ul>
   </div>
 </nav>
@@ -26,15 +20,15 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-block">
-              <h5 class="card-title">Add New Marker</h5>
-              <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+              <h5 class="card-title">Add New Location</h5>
+              <!--<span class="card-subtitle text-muted">drop a pin</span>-->
             </div>
           
             <div class="card-block">
               <form (submit)="addMarker()">
                 <fieldset>
                   <div class="form-group">
-                      <label>Location Name</label>
+                      <label>Location</label>
                       <input type="text" class="form-control" [(ngModel)]="markerName" name="markerName">
                       <label>latitude</label>
                       <input type="text" class="form-control" [(ngModel)]="markerLatitude" name="markerLatitude">
@@ -58,14 +52,20 @@
     <!--map-->
     <div class="col-md-9 map-container">
       <div class="map">
-        <sebm-google-map [latitude]="lat" [longitude]="long" [zoom]="zoomLevel" [disableDefaultUI]="false" [zoomControl]="false"
+        <sebm-google-map 
+          [latitude]="lat" 
+          [longitude]="long" 
+          [zoom]="zoomLevel" 
+          [disableDefaultUI]="true" 
+          [zoomControl]="false"
           (mapClick)="mapClicked($event)">
 
           <sebm-google-map-marker *ngFor="let marker of markers; let i = index" 
             (markerClick)="clickedMarker(marker,i)" 
             [latitude]="marker.lat"
             [longitude]="marker.long" 
-            [markerDraggable]="marker.draggable" 
+            [markerDraggable]="marker.draggable"
+            [label]="i" 
             (dragEnd)="markerDragEnd(marker, $event)">
 
             <sebm-google-map-info-window>

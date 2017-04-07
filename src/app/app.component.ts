@@ -39,9 +39,9 @@ export class AppComponent implements OnInit{
       long: $event.coords.lng,
       draggable:false,
     }
-    console.log(newMarker);
     this.markers.push(newMarker);
-
+    this._markerService.addMarker(newMarker);
+    
   }
   clickedMarker(marker:marker, index:number){
     // console.log(marker);
