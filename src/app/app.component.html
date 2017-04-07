@@ -1,8 +1,47 @@
-<h1>{{ title }}</h1>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">{{title}}</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-
-<sebm-google-map [latitude]="latitude" [longitude]="longitude">
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-</sebm-google-map>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="map">
+        <sebm-google-map 
+          [latitude]="lat"
+          [longitude]="long"
+          [zoom] = "zoomLevel"
+          [disableDefaultUI]="false"
+          [zoomControl]="false"
+          (mapClick)="mapClicked($event)">
+          <sebm-google-map-marker 
+            *ngFor="let marker of markers; let i = index"
+            (markerClick)="clickedMarker(marker,i)"
+            [latitude]="marker.lat" 
+            [longitude]="marker.long"
+            [markerDraggable]="marker.draggable"
+            (dragEnd)="markerDragEnd(marker, $event)">
+              <sebm-google-map-info-window>
+                <strong>{{marker.name}}</strong>
+              </sebm-google-map-info-window>
+            </sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+    </div>
+  </div>
+</div>
