@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MarkerService } from "./services/marker.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [MarkerService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Mapply';
   lat: number = 6.5244;
   long: number = 3.3792;
@@ -17,33 +19,19 @@ export class AppComponent {
   markerDraggable:string;
 
   markers: marker[] = [
-    {
-      name: 'Company A',
-      lat: 6.5152,
-      long: 3.3792,
-      draggable: true
-    },
-    {
-      name: 'Company B',
-      lat: 6.5112,
-      long: 3.1792,
-      draggable: true
-    },
-    {
-      name: 'Company C',
-      lat: 6.5352,
-      long: 3.6792,
-      draggable: true
-    }
   ];
 
   /**
    *
    */
-  constructor() {
-    
-  }
+  constructor(private _markerService:MarkerService) {
   
+}
+
+  ngOnInit(){
+    this.markers = this._markerService.getMarkers();
+  }
+
   mapClicked($event:any){
     let newMarker = {
       name: 'Untitled',
@@ -60,8 +48,6 @@ export class AppComponent {
     console.log(index);
   }
   markerDragEnd(marker, $event){
-    console.log('dragged', marker, $event);
-
     let updatedMarker = {
       name: marker.name,
       lat: parseFloat(marker.lat),
@@ -71,7 +57,7 @@ export class AppComponent {
     let newLatitude = $event.coords.lat;
     let newLongitude = $event.coords.lng;
 
-    console.log('dragged new', marker, $event);
+    this._markerService.updatemarker(updatedMarker, newLatitude, newLongitude)
   }
 
   addMarker(){
@@ -84,7 +70,8 @@ export class AppComponent {
       long: parseFloat(this.markerLongitude),
       draggable: isDraggable,
     }
-    this.markers.push(newMarker)
+    this.markers.push(newMarker);
+    this._markerService.addMarker(newMarker);
     console.log(`adding marker ${newMarker}`)
   }
 

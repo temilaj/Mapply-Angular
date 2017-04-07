@@ -19,9 +19,44 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block">
+              <h5 class="card-title">Add New Marker</h5>
+              <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+            </div>
+          
+            <div class="card-block">
+              <form (submit)="addMarker()">
+                <fieldset>
+                  <div class="form-group">
+                      <label>Location Name</label>
+                      <input type="text" class="form-control" [(ngModel)]="markerName" name="markerName">
+                      <label>latitude</label>
+                      <input type="text" class="form-control" [(ngModel)]="markerLatitude" name="markerLatitude">
+                      <label>Longitude</label>
+                      <input type="text" class="form-control" [(ngModel)]="markerLongitude" name="markerLongitude">
+                      <label>Draggable</label>
+                      <select class="form-control" [(ngModel)]="markerDraggable" name="markerDraggable">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add Marker</button>
+                </fieldset>
+              </form>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+
+    <!--map-->
+    <div class="col-md-9">
       <div class="map">
         <sebm-google-map [latitude]="lat" [longitude]="long" [zoom]="zoomLevel" [disableDefaultUI]="false" [zoomControl]="false"
           (mapClick)="mapClicked($event)">
@@ -35,44 +70,5 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-block">
-          <h5 class="card-title">Add New Marker</h5>
-          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-        </div>
-       
-        <div class="card-block">
-          <form (submit)="addMarker()">
-            <fieldset>
-              <div class="form-group row">
-                <div class="col-sm-5">
-                  <label>Location Name</label>
-                  <input type="text" class="form-control" [(ngModel)]="markerName" name="markerName">
-                </div>
-                <div class="col">
-                  <label>latitude</label>
-                  <input type="text" class="form-control" [(ngModel)]="markerLatitude" name="markerLatitude">
-                </div>
-                <div class="col">
-                  <label>Longitude</label>
-                  <input type="text" class="form-control" [(ngModel)]="markerLongitude" name="markerLongitude">
-                </div>
-                <div class="col-sm-2">
-                  <label>Draggable</label>
-                  <select class="form-control" [(ngModel)]="markerDraggable" name="markerDraggable">
-                    <option value="no">No</option>
-                    <option value="yes">Yes</option>
-                  </select>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Add Marker</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>  
-    </div>
-  </div>
+  
 </div>
