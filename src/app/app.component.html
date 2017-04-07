@@ -1,5 +1,6 @@
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="#">{{title}}</a>
@@ -22,26 +23,56 @@
   <div class="row">
     <div class="col-md-12">
       <div class="map">
-        <sebm-google-map 
-          [latitude]="lat"
-          [longitude]="long"
-          [zoom] = "zoomLevel"
-          [disableDefaultUI]="false"
-          [zoomControl]="false"
+        <sebm-google-map [latitude]="lat" [longitude]="long" [zoom]="zoomLevel" [disableDefaultUI]="false" [zoomControl]="false"
           (mapClick)="mapClicked($event)">
-          <sebm-google-map-marker 
-            *ngFor="let marker of markers; let i = index"
-            (markerClick)="clickedMarker(marker,i)"
-            [latitude]="marker.lat" 
-            [longitude]="marker.long"
-            [markerDraggable]="marker.draggable"
-            (dragEnd)="markerDragEnd(marker, $event)">
-              <sebm-google-map-info-window>
-                <strong>{{marker.name}}</strong>
-              </sebm-google-map-info-window>
-            </sebm-google-map-marker>
+          <sebm-google-map-marker *ngFor="let marker of markers; let i = index" (markerClick)="clickedMarker(marker,i)" [latitude]="marker.lat"
+            [longitude]="marker.long" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">
+            <sebm-google-map-info-window>
+              <strong>{{marker.name}}</strong>
+            </sebm-google-map-info-window>
+          </sebm-google-map-marker>
         </sebm-google-map>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-block">
+          <h5 class="card-title">Add New Marker</h5>
+          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+        </div>
+       
+        <div class="card-block">
+          <form (submit)="addMarker()">
+            <fieldset>
+              <div class="form-group row">
+                <div class="col-sm-5">
+                  <label>Location Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="markerName" name="markerName">
+                </div>
+                <div class="col">
+                  <label>latitude</label>
+                  <input type="text" class="form-control" [(ngModel)]="markerLatitude" name="markerLatitude">
+                </div>
+                <div class="col">
+                  <label>Longitude</label>
+                  <input type="text" class="form-control" [(ngModel)]="markerLongitude" name="markerLongitude">
+                </div>
+                <div class="col-sm-2">
+                  <label>Draggable</label>
+                  <select class="form-control" [(ngModel)]="markerDraggable" name="markerDraggable">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Marker</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>  
     </div>
   </div>
 </div>
