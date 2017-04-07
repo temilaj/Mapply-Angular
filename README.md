@@ -1,6 +1,6 @@
 # Mapply Angular
 
-I've got a pretty unfledged plan for this, I don't know what it's goinf to be yet, but let's hope it's cool.
+I've got a pretty unfledged plan for this, I don't know what it's going to be yet, but let's hope it's cool.
 ![Mapply Image](/mapply.png)
 
 ## Prerequisites
