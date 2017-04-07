@@ -30,7 +30,6 @@ export class MarkerService extends Init{
             if(marker.lat == markers[index].lat && marker.long == markers[index].long){
                 markers[index].lat = newLatitude;
                 markers[index].long = newLongitude;
-            
             }
         }   
 
@@ -39,6 +38,17 @@ export class MarkerService extends Init{
         // array.forEach(element => {
             
         // }); 
+    }
+    removeMarker(marker){
+        let markers = JSON.parse(localStorage.getItem('markers'));
+
+        for (let index = 0; index < markers.length; index++) {
+            if(marker.lat == markers[index].lat && marker.long == markers[index].long){
+                markers.splice(index,1);
+            }
+        }   
+
+        localStorage.setItem('markers', JSON.stringify(markers));        
     }
 
 }

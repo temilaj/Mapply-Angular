@@ -21,7 +21,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 form-container">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -56,16 +56,26 @@
     </div>
 
     <!--map-->
-    <div class="col-md-9">
+    <div class="col-md-9 map-container">
       <div class="map">
         <sebm-google-map [latitude]="lat" [longitude]="long" [zoom]="zoomLevel" [disableDefaultUI]="false" [zoomControl]="false"
           (mapClick)="mapClicked($event)">
-          <sebm-google-map-marker *ngFor="let marker of markers; let i = index" (markerClick)="clickedMarker(marker,i)" [latitude]="marker.lat"
-            [longitude]="marker.long" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">
+
+          <sebm-google-map-marker *ngFor="let marker of markers; let i = index" 
+            (markerClick)="clickedMarker(marker,i)" 
+            [latitude]="marker.lat"
+            [longitude]="marker.long" 
+            [markerDraggable]="marker.draggable" 
+            (dragEnd)="markerDragEnd(marker, $event)">
+
             <sebm-google-map-info-window>
               <strong>{{marker.name}}</strong>
+              <br>
+              <a class="delete" (click)="removeMarker(marker)">delete</a>
             </sebm-google-map-info-window>
+          
           </sebm-google-map-marker>
+
         </sebm-google-map>
       </div>
     </div>

@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
   title = 'Mapply';
   lat: number = 6.5244;
   long: number = 3.3792;
-  zoomLevel: number = 10;
+  zoomLevel: number = 9;
 
   markerName:string;
   markerLatitude:string;
@@ -44,8 +44,8 @@ export class AppComponent implements OnInit{
 
   }
   clickedMarker(marker:marker, index:number){
-    console.log(marker);
-    console.log(index);
+    // console.log(marker);
+    // console.log(index);
   }
   markerDragEnd(marker, $event){
     let updatedMarker = {
@@ -73,6 +73,16 @@ export class AppComponent implements OnInit{
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
     console.log(`adding marker ${newMarker}`)
+  }
+
+  removeMarker(marker){
+    console.log('Removing marker...');
+    for(var i =0; i< this.markers.length; i++){
+      if(marker.lat == this.markers[i].lat && marker.long == this.markers[i].long){
+        this.markers.splice(i,1);
+      }
+    }
+    this._markerService.removeMarker(marker);
   }
 
 }
