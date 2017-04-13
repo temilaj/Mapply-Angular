@@ -5,7 +5,7 @@ import { MarkerService } from "./services/marker.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [MarkerService]
+  providers: [MarkerService],
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';
@@ -34,18 +34,10 @@ export class AppComponent implements OnInit{
   }
 
   mapClicked($event:any){
+    console.log($event)
     this.lat = $event.coords.lat,
     this.long = $event.coords.lng;
     this.appState = 'addMarker';
-    // let newMarker = {
-    //   name: 'Untitled',
-    //   lat: $event.coords.lat,
-    //   long: $event.coords.lng,
-    //   draggable:false,
-    // }
-    // this.markers.push(newMarker);
-    // this._markerService.addMarker(newMarker);
-    
   }
   
   modalSubmit(){
@@ -57,6 +49,8 @@ export class AppComponent implements OnInit{
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
+    this.appState = '';
+    
   }
 
   clickedMarker(marker:marker, index:number){
