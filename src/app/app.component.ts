@@ -7,9 +7,10 @@ import { MarkerService } from "./services/marker.service";
   styleUrls: ['./app.component.css'],
   providers: [MarkerService],
   animations: [
-    trigger('heroState', [
-      state('addMarker', style({height: '*'})),
-      transition('void => *', [
+    trigger('modalState', [
+      state('addMarker', style({opacity: 1, transform: 'translateX(0)'})),
+      // state('inactive', style({opacity: 0, transform: 'translateX(100%)'})),
+      transition('void <=> *', [
         style({
           opacity: 0,
           transform: 'translateX(-100%)'
@@ -21,7 +22,7 @@ import { MarkerService } from "./services/marker.service";
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';
-  appState: string = 'inactive';
+  markerModalState: string = 'inactive';
   lat: number = 6.5244;
   long: number = 3.3792;
   zoomLevel: number = 9;
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit{
     // console.log($event)
     this.lat = $event.coords.lat,
     this.long = $event.coords.lng;
-    this.appState = 'addMarker';
+    this.markerModalState = 'addMarker';
   }
   
   modalSubmit(){
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit{
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
     this.markerName = '';
-    this.appState = '';
+    this.markerModalState = 'inactive';
     
   }
 
@@ -109,7 +110,7 @@ export class AppComponent implements OnInit{
   }
   
   changeState(updatedState) {
-    this.appState = updatedState;
+    this.markerModalState = updatedState;
   }
 }
   //marker type

@@ -101,7 +101,7 @@
         </sebm-google-map>
       </div>
 
-      <div class="marker-modal" *ngIf="appState == 'addMarker'" [@heroState]="appState">
+      <div class="marker-modal" *ngIf="markerModalState == 'addMarker'" [@modalState]="markerModalState">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
