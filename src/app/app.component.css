@@ -1,5 +1,5 @@
 .sebm-google-map-container {
-  height: 700px;
+  height: 100vh;
 }
 .navbar{
     margin-bottom: 0.1rem;
@@ -10,3 +10,10 @@
  .gm-style > div{
      cursor: crosshair !important;
  }
+
+ .marker-modal {
+    position: absolute;
+    z-index: 9999;
+    top: 30%;
+    left: 35%;
+}

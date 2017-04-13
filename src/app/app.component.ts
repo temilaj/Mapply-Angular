@@ -9,6 +9,7 @@ import { MarkerService } from "./services/marker.service";
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';
+  appState: string;
   lat: number = 6.5244;
   long: number = 3.3792;
   zoomLevel: number = 9;
@@ -33,16 +34,31 @@ export class AppComponent implements OnInit{
   }
 
   mapClicked($event:any){
+    this.lat = $event.coords.lat,
+    this.long = $event.coords.lng;
+    this.appState = 'addMarker';
+    // let newMarker = {
+    //   name: 'Untitled',
+    //   lat: $event.coords.lat,
+    //   long: $event.coords.lng,
+    //   draggable:false,
+    // }
+    // this.markers.push(newMarker);
+    // this._markerService.addMarker(newMarker);
+    
+  }
+  
+  modalSubmit(){
     let newMarker = {
-      name: 'Untitled',
-      lat: $event.coords.lat,
-      long: $event.coords.lng,
+      name: this.markerName,
+      lat: this.lat,
+      long: this.long,
       draggable:false,
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
-    
   }
+
   clickedMarker(marker:marker, index:number){
     // console.log(marker);
     // console.log(index);
@@ -84,7 +100,10 @@ export class AppComponent implements OnInit{
     }
     this._markerService.removeMarker(marker);
   }
-
+  
+  changeState(updatedState) {
+    this.appState = updatedState;
+  }
 }
   //marker type
 interface marker{
