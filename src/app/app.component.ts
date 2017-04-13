@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import {  trigger,  state,  style,  animate,  transition} from '@angular/animations';
 import { MarkerService } from "./services/marker.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [MarkerService],
+  // animations: [
+  //   trigger('heroState', [
+  //     state('inactive', style({
+  //       backgroundColor: 'blue',
+  //       transform: 'scale(1)'
+  //     })),
+  //     state('addMarker',   style({
+  //       backgroundColor: 'red',
+  //       transform: 'scale(1.1)'
+  //     })),
+  //     transition('inactive => addMarker', animate('1000ms ease-in')),
+  //     transition('addMarker => inactive', animate('1000ms ease-out'))
+  //   ])
+  // ]
+  animations: [
+    trigger('heroState', [
+      state('addMarker', style({height: '*'})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('0.5s ease-in')
+      ])
+    ])
+  ]
+
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';
-  appState: string;
+  appState: string = 'inactive';
   lat: number = 6.5244;
   long: number = 3.3792;
   zoomLevel: number = 9;
@@ -34,7 +61,7 @@ export class AppComponent implements OnInit{
   }
 
   mapClicked($event:any){
-    console.log($event)
+    // console.log($event)
     this.lat = $event.coords.lat,
     this.long = $event.coords.lng;
     this.appState = 'addMarker';
@@ -49,6 +76,7 @@ export class AppComponent implements OnInit{
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
+    this.markerName = '';
     this.appState = '';
     
   }

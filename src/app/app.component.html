@@ -102,7 +102,7 @@
       </div>
 
       <!--<div class="marker-modal">-->
-      <div class="marker-modal" *ngIf="appState == 'addMarker'">
+      <div class="marker-modal" *ngIf="appState == 'addMarker'" [@heroState]="appState">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
