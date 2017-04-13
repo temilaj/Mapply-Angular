@@ -1,14 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import {  trigger,  state,  style,  animate,  transition} from '@angular/animations';
 import { MarkerService } from "./services/marker.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [MarkerService]
+  providers: [MarkerService],
+  animations: [
+    trigger('heroState', [
+      state('addMarker', style({height: '*'})),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('0.5s ease-in')
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';
+  appState: string = 'inactive';
   lat: number = 6.5244;
   long: number = 3.3792;
   zoomLevel: number = 9;
@@ -33,16 +46,26 @@ export class AppComponent implements OnInit{
   }
 
   mapClicked($event:any){
+    // console.log($event)
+    this.lat = $event.coords.lat,
+    this.long = $event.coords.lng;
+    this.appState = 'addMarker';
+  }
+  
+  modalSubmit(){
     let newMarker = {
-      name: 'Untitled',
-      lat: $event.coords.lat,
-      long: $event.coords.lng,
+      name: this.markerName,
+      lat: this.lat,
+      long: this.long,
       draggable:false,
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
+    this.markerName = '';
+    this.appState = '';
     
   }
+
   clickedMarker(marker:marker, index:number){
     // console.log(marker);
     // console.log(index);
@@ -84,7 +107,10 @@ export class AppComponent implements OnInit{
     }
     this._markerService.removeMarker(marker);
   }
-
+  
+  changeState(updatedState) {
+    this.appState = updatedState;
+  }
 }
   //marker type
 interface marker{
