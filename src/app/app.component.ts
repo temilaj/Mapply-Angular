@@ -6,20 +6,6 @@ import { MarkerService } from "./services/marker.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [MarkerService],
-  // animations: [
-  //   trigger('heroState', [
-  //     state('inactive', style({
-  //       backgroundColor: 'blue',
-  //       transform: 'scale(1)'
-  //     })),
-  //     state('addMarker',   style({
-  //       backgroundColor: 'red',
-  //       transform: 'scale(1.1)'
-  //     })),
-  //     transition('inactive => addMarker', animate('1000ms ease-in')),
-  //     transition('addMarker => inactive', animate('1000ms ease-out'))
-  //   ])
-  // ]
   animations: [
     trigger('heroState', [
       state('addMarker', style({height: '*'})),
@@ -32,7 +18,6 @@ import { MarkerService } from "./services/marker.service";
       ])
     ])
   ]
-
 })
 export class AppComponent implements OnInit{
   title = 'Mapply';

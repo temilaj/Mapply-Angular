@@ -101,7 +101,6 @@
         </sebm-google-map>
       </div>
 
-      <!--<div class="marker-modal">-->
       <div class="marker-modal" *ngIf="appState == 'addMarker'" [@heroState]="appState">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -112,7 +111,6 @@
               </button>
             </div>
             <div class="modal-body">
-              <!--<p>Modal body text goes here.</p>-->
               <form (submit)="modalSubmit()">
                 <fieldset>
                   <div class="form-group">
