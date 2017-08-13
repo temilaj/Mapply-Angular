@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {  trigger,  state,  style,  animate,  transition} from '@angular/animations';
-import { MarkerService } from "./services/marker.service";
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MarkerService } from "app/services/marker.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,28 +33,23 @@ export class AppComponent implements OnInit{
   markerLongitude:string;
   markerDraggable:string;
 
-  markers: marker[] = [
-  ];
+  markers: marker[] = [];
 
-  /**
-   *
-   */
   constructor(private _markerService:MarkerService) {
   
-}
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.markers = this._markerService.getMarkers();
   }
 
-  mapClicked($event:any){
-    // console.log($event)
+  mapClicked($event:any) {
     this.lat = $event.coords.lat,
     this.long = $event.coords.lng;
     this.markerModalState = 'addMarker';
   }
   
-  modalSubmit(){
+  modalSubmit() {
     let newMarker = {
       name: this.markerName,
       lat: this.lat,
@@ -67,11 +63,9 @@ export class AppComponent implements OnInit{
     
   }
 
-  clickedMarker(marker:marker, index:number){
-    // console.log(marker);
-    // console.log(index);
+  clickedMarker(marker:marker, index:number) {
   }
-  markerDragEnd(marker, $event){
+  markerDragEnd(marker, $event) {
     let updatedMarker = {
       name: marker.name,
       lat: parseFloat(marker.lat),
@@ -84,11 +78,11 @@ export class AppComponent implements OnInit{
     this._markerService.updatemarker(updatedMarker, newLatitude, newLongitude)
   }
 
-  addMarker(){
+  addMarker() {
     let isDraggable
     this.markerDraggable === "yes" ? isDraggable = true : isDraggable = false;
 
-    var newMarker = {
+    let newMarker = {
       name: this.markerName,
       lat: parseFloat(this.markerLatitude),
       long: parseFloat(this.markerLongitude),
@@ -96,13 +90,11 @@ export class AppComponent implements OnInit{
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
-    console.log(`adding marker ${newMarker}`)
   }
 
-  removeMarker(marker){
-    console.log('Removing marker...');
-    for(var i =0; i< this.markers.length; i++){
-      if(marker.lat == this.markers[i].lat && marker.long == this.markers[i].long){
+  removeMarker(marker) {
+    for (let i =0; i< this.markers.length; i++) {
+      if (marker.lat == this.markers[i].lat && marker.long == this.markers[i].long) {
         this.markers.splice(i,1);
       }
     }
@@ -113,7 +105,7 @@ export class AppComponent implements OnInit{
     this.markerModalState = updatedState;
   }
 }
-  //marker type
+
 interface marker{
   name?: string,
   lat: number,
