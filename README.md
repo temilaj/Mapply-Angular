@@ -1,7 +1,7 @@
 # Mapply Angular
 
 I've got a pretty unfledged plan for this, I don't know what it's going to be yet, but let's hope it's cool.
-You should check it out here temilaj.github.io/Mapply-Angular/
+You should check it out here [temilaj.github.io/Mapply-Angular/](temilaj.github.io/Mapply-Angular/)
 
 ![Mapply Image](/mapply.png)
 
