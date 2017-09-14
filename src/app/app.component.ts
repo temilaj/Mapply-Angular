@@ -27,7 +27,6 @@ export class AppComponent implements OnInit{
   lat: number = 6.5244;
   long: number = 3.3792;
   zoomLevel: number = 9;
-
   markerName:string;
   markerLatitude:string;
   markerLongitude:string;
