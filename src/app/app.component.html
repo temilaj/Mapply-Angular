@@ -25,7 +25,7 @@
             </div>
           
             <div class="card-block">
-              <form (submit)="addMarker()">
+              <form (submit)="addMarker()" [hidden]="submitted">
                 <fieldset>
                   <div class="form-group">
                       <label>Location</label>
