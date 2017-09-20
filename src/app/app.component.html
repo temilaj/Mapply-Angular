@@ -53,16 +53,14 @@
                 <tr>
                   <th>#</th>
                   <th>Location</th>
-                  <!--<th>Column heading</th>-->
-                  <!--<th>Column heading</th>-->
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let marker of markers; let i = index" >
                   <td>{{ i + 1}}</td>
                   <td>{{marker.name}}</td>
-                  <!--<td>{{marker.lat}}</td>-->
-                  <!--<td>{{marker.long}}</td>-->
+                  <!-- <td>{{marker.lat}}</td>
+                  <td>{{marker.long}}</td> -->
                 </tr>
               </tbody>
             </table> 
@@ -79,7 +77,7 @@
           [longitude]="long" 
           [zoom]="zoomLevel" 
           [disableDefaultUI]="true" 
-          [zoomControl]="false"
+          [zoomControl]="true"
           (mapClick)="mapClicked($event)">
 
           <sebm-google-map-marker *ngFor="let marker of markers; let i = index" 

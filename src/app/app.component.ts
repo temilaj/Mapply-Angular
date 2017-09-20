@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   markerModalState: string = 'inactive';
   lat: number = 6.5244;
   long: number = 3.3792;
-  zoomLevel: number = 9;
+  zoomLevel: number = 6;
   markerName:string;
   markerLatitude:string;
   markerLongitude:string;
@@ -89,6 +89,10 @@ export class AppComponent implements OnInit{
     }
     this.markers.push(newMarker);
     this._markerService.addMarker(newMarker);
+    this.markerName = "";
+    this.markerLatitude = "";
+    this.markerLongitude = "";
+    this.markerDraggable = "";
   }
 
   removeMarker(marker) {
